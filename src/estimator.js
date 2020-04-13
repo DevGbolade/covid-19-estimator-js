@@ -56,25 +56,53 @@ const covid19ImpactEstimator = (data) => {
   const hospitalBedsByRequestedTimeSevereImpact = Math.trunc(0.35 * data.totalHospitalBeds
     - severeCasesByRequestedTimeSevereImpact);
 
+  // CHALLENGE THREE
+  // number of severe patients that will require ICU after a given time period for Impact
+  const casesForICUByRequestedTimeImpact = Math.trunc(0.05 * infectionsByRequestedTimeImpact);
+
+  // number of severe patients that will require ICU after a given time period  for severeImpact
+  // eslint-disable-next-line max-len
+  const casesForICUByRequestedTimeSevereImpact = Math.trunc(0.05 * infectionsByRequestedTimeSevereImpact);
+
+  //  estimated number of severe patients who will require ventilators for Impact
+  const casesForVentilatorsByRequestedTimeImpact = Math.trunc(0.02
+    * infectionsByRequestedTimeImpact);
+
+  //  estimated number of severe patients who will require ventilators for severeImpact
+  const casesForVentilatorsByRequestedTimeSevereImpact = Math.trunc(0.02
+    * infectionsByRequestedTimeSevereImpact);
+
+  //  estimated economic impact for Impact
+  const dollarsInFlightImpact = Math.floor(infectionsByRequestedTimeImpact
+    * 0.65 * data.region.avgDailyIncomeInUSD * numberOfDays(data.timeToElapse, data.periodType));
+
+  // estimated economic impact  for severeImpact
+  const dollarsInFlightSevereImpact = Math.floor(infectionsByRequestedTimeSevereImpact
+    * 0.65 * data.region.avgDailyIncomeInUSD * numberOfDays(data.timeToElapse, data.periodType));
+
+
   return {
     data,
     impact: {
       currentlyInfected: keyImpact,
       infectionsByRequestedTime: infectionsByRequestedTimeImpact,
       severeCasesByRequestedTime: severeCasesByRequestedTimeImpact,
-      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact,
+      casesForICUByRequestedTime: casesForICUByRequestedTimeImpact,
+      casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeImpact,
+      dollarsInFlight: dollarsInFlightImpact
 
     },
     severeImpact: {
       currentlyInfected: keySevereImpact,
       infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact,
       severeCasesByRequestedTime: severeCasesByRequestedTimeSevereImpact,
-      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevereImpact
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevereImpact,
+      casesForICUByRequestedTime: casesForICUByRequestedTimeSevereImpact,
+      casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevereImpact,
+      dollarsInFlight: dollarsInFlightSevereImpact
     }
   };
 };
-
-
-// covid19ImpactEstimator(data);
 
 export default covid19ImpactEstimator;
