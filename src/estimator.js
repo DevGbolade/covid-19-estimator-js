@@ -74,13 +74,14 @@ const covid19ImpactEstimator = (data) => {
     * infectionsByRequestedTimeSevereImpact);
 
   //  estimated economic impact for Impact
-  const dollarsInFlightImpact = Math.floor(infectionsByRequestedTimeImpact
-    * 0.65 * data.region.avgDailyIncomeInUSD / numberOfDays(data.timeToElapse, data.periodType));
+  const dollarsInFlightImpact = Math.trunc((infectionsByRequestedTimeImpact
+    * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD)
+    / numberOfDays(data.timeToElapse, data.periodType));
 
   // estimated economic impact  for severeImpact
-  const dollarsInFlightSevereImpact = Math.floor(infectionsByRequestedTimeSevereImpact
-    // eslint-disable-next-line no-mixed-operators
-    * 0.65 * data.region.avgDailyIncomeInUSD / numberOfDays(data.timeToElapse, data.periodType));
+  const dollarsInFlightSevereImpact = Math.trunc((infectionsByRequestedTimeSevereImpact
+      * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD)
+      / numberOfDays(data.timeToElapse, data.periodType));
 
 
   return {
