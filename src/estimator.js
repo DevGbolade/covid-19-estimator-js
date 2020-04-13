@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 const covid19ImpactEstimator = (data) => {
   const { reportedCases } = data;
 
@@ -74,11 +75,12 @@ const covid19ImpactEstimator = (data) => {
 
   //  estimated economic impact for Impact
   const dollarsInFlightImpact = Math.floor(infectionsByRequestedTimeImpact
-    * 0.65 * data.region.avgDailyIncomeInUSD * numberOfDays(data.timeToElapse, data.periodType));
+    * 0.65 * data.region.avgDailyIncomeInUSD / numberOfDays(data.timeToElapse, data.periodType));
 
   // estimated economic impact  for severeImpact
   const dollarsInFlightSevereImpact = Math.floor(infectionsByRequestedTimeSevereImpact
-    * 0.65 * data.region.avgDailyIncomeInUSD * numberOfDays(data.timeToElapse, data.periodType));
+    // eslint-disable-next-line no-mixed-operators
+    * 0.65 * data.region.avgDailyIncomeInUSD / numberOfDays(data.timeToElapse, data.periodType));
 
 
   return {
