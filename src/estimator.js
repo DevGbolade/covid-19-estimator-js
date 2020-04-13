@@ -60,14 +60,14 @@ const covid19ImpactEstimator = (data) => {
     data,
     impact: {
       currentlyInfected: keyImpact,
-      infectionsByRequestedTime: infectionsByRequestedTimeImpact(keyImpact),
+      infectionsByRequestedTime: infectionsByRequestedTimeImpact,
       severeCasesByRequestedTime: severeCasesByRequestedTimeImpact,
       hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact
 
     },
     severeImpact: {
       currentlyInfected: keySevereImpact,
-      infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact(keySevereImpact),
+      infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact,
       severeCasesByRequestedTime: severeCasesByRequestedTimeSevereImpact,
       hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevereImpact
     }
