@@ -1,6 +1,8 @@
 const covid19ImpactEstimator = (data) => {
   const { reportedCases } = data;
 
+
+  // CHALLENGE ONE
   const keyImpact = reportedCases * 10;
   const keySevereImpact = reportedCases * 50;
 
@@ -39,15 +41,35 @@ const covid19ImpactEstimator = (data) => {
     data.timeToElapse
   );
 
+  // CHALLENGE TWO
+  // number of severe positive cases over a given time period for Impact
+  const severeCasesByRequestedTimeImpact = 0.15 * infectionsByRequestedTimeImpact;
+
+  // number of severe positive cases over a given time period for severeImpact
+  const severeCasesByRequestedTimeSevereImpact = 0.15 * infectionsByRequestedTimeSevereImpact;
+
+  // number of available hospital beds for severe patients after a given time period for Impact
+  const hospitalBedsByRequestedTimeImpact = Math.trunc(0.35 * data.totalHospitalBeds
+    - severeCasesByRequestedTimeImpact);
+
+  // number of available hospital beds for severe patients after a given time period for severImpact
+  const hospitalBedsByRequestedTimeSevereImpact = Math.trunc(0.35 * data.totalHospitalBeds
+    - severeCasesByRequestedTimeSevereImpact);
+
   return {
     data,
     impact: {
       currentlyInfected: keyImpact,
-      infectionsByRequestedTime: infectionsByRequestedTimeImpact(keyImpact)
+      infectionsByRequestedTime: infectionsByRequestedTimeImpact(keyImpact),
+      severeCasesByRequestedTime: severeCasesByRequestedTimeImpact,
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact
+
     },
     severeImpact: {
       currentlyInfected: keySevereImpact,
-      infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact(keySevereImpact)
+      infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact(keySevereImpact),
+      severeCasesByRequestedTime: severeCasesByRequestedTimeSevereImpact,
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevereImpact
     }
   };
 };
