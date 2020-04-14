@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "babel-node src/api/server.js",
+    "start": "node src/api/server.js",
     "start:prod": "nodemon set NODE_ENV=production --exec babel-node src/api/server.js",
     "lint": "eslint ./src/"
   },
