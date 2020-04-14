@@ -7,7 +7,7 @@ console.log(process.env.NODE_ENV);
 
 app.listen(port, () => {
   console.log(`${blueBright(
-    `👉👉   Project running on http://localhost:${port}`
+    `👉👉   Project running on ${port}`
   )}
   `);
 });
