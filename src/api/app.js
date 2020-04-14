@@ -1,17 +1,20 @@
-import express from 'express';
-import morgan from 'morgan';
-import { createWriteStream } from 'fs';
-import { join } from 'path';
-import cors from 'cors';
+const express = require('express');
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
+const cors = require('cors');
 
-import routes from './routes/index.route';
+const { createWriteStream } = fs;
+
+
+const routes = require('./routes/index.route');
 
 
 const app = express();
 
 // create a write stream for (morgan logger)
 const accessLogStream = createWriteStream(
-  join(__dirname, 'access.log'),
+  path.join(__dirname, 'access.log'),
   { flags: 'a' }
 );
 
@@ -48,4 +51,4 @@ app.all('*', (req, res) => {
 });
 
 
-export default app;
+module.exports = app;
