@@ -33,5 +33,9 @@
   },
   "browserslist": [
     "last 1 Chrome versions"
-  ]
+  ],
+  "engines": {
+    "node": "v13.11.0",
+    "npm": "6.13.7"
+  }
 }
