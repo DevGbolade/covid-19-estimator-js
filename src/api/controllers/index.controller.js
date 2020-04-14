@@ -5,7 +5,6 @@ const { join } = require('path');
 const estimator = require('../../estimator');
 
 
-// const Controllers = {
 exports.jsonController = (req, res) => {
   if (Object.keys(req.body).length === 0) {
     return res
@@ -52,6 +51,3 @@ exports.logsController = (_req, res) => {
     return res.type('text/plain').status(200).send(data);
   });
 };
-
-// };
-// exports.default = Controllers;
